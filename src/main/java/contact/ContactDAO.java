@@ -70,18 +70,18 @@ public class ContactDAO {
 	public ArrayList<ContactDTO> findAll() throws Exception{
 		ArrayList<ContactDTO> contacts 	= new ArrayList<ContactDTO>();
 		StringBuilder sql 				= new StringBuilder();
-		sql.append("SELECT a.id							");
+		sql.append("SELECT a.id						");
 		sql.append("	 , b.profile_val				");
-		sql.append("	 , a.name						");
+		sql.append("	 , a.name					");
 		sql.append("	 , a.phone_num					");
 		sql.append("	 , a.address					");
 		sql.append("	 , c.gubun_name					");
-		sql.append("	 , a.memo						");
+		sql.append("	 , a.memo					");
 		sql.append("  FROM contact a					");
 		sql.append("  	 , profile b					");
-		sql.append("  	 , gubun c						");
-		sql.append(" WHERE a.profile_id = b.profile_id	");
-		sql.append("   AND a.gubun_id = c.gubun_id		");
+		sql.append("  	 , gubun c					");
+		sql.append(" WHERE a.profile_id = b.profile_id			");
+		sql.append("   AND a.gubun_id = c.gubun_id			");
 		sql.append("   AND a.user_id = ?				");
 		
 		Connection con 			= open();
@@ -109,18 +109,18 @@ public class ContactDAO {
 	public ArrayList<ContactDTO> findById(String name) throws Exception{
 		ArrayList<ContactDTO> contacts 	= new ArrayList<ContactDTO>();
 		StringBuilder sql 				= new StringBuilder();
-		sql.append("SELECT a.id							");
+		sql.append("SELECT a.id						");
 		sql.append("	 , b.profile_val				");
-		sql.append("	 , a.name						");
+		sql.append("	 , a.name					");
 		sql.append("	 , a.phone_num					");
 		sql.append("	 , a.address					");
 		sql.append("	 , c.gubun_name					");
-		sql.append("	 , a.memo						");
+		sql.append("	 , a.memo					");
 		sql.append("  FROM contact a					");
 		sql.append("  	 , profile b					");
-		sql.append("  	 , gubun c						");
-		sql.append(" WHERE a.profile_id = b.profile_id	");
-		sql.append("   AND a.gubun_id = c.gubun_id		");
+		sql.append("  	 , gubun c					");
+		sql.append(" WHERE a.profile_id = b.profile_id			");
+		sql.append("   AND a.gubun_id = c.gubun_id			");
 		sql.append("   AND a.user_id = ?				");
 		sql.append("   AND a.name like ?				");
 		
@@ -149,20 +149,20 @@ public class ContactDAO {
 //	4. 회원 수정 메소드
 	public void Update(ContactDTO contactDTO) throws Exception {
 		StringBuilder sql		= new StringBuilder();
-		sql.append("UPDATE contact								");
+		sql.append("UPDATE contact					");
 		sql.append("   SET profile_id = (SELECT profile_id		");
-		sql.append("					   FROM profile			");
-		sql.append("					  WHERE profile_val = ?)");
-		sql.append("     , name = ?								");
-		sql.append("   	 , phone_num = ?						");
-		sql.append("   	 , address = ?							");
+		sql.append("			   FROM profile			");
+		sql.append("			  WHERE profile_val = ?)	");
+		sql.append("     , name = ?					");
+		sql.append("   	 , phone_num = ?				");
+		sql.append("   	 , address = ?					");
 		sql.append("   	 , GUBUN_ID = (SELECT GUBUN_ID			");
-		sql.append("  					 FROM gubun				");
-		sql.append("			   		WHERE GUBUN_NAME = ?)	");
-		sql.append("   	 , memo = ?								");
-		sql.append(" WHERE id = ?								");
+		sql.append("  			 FROM gubun			");
+		sql.append("			WHERE GUBUN_NAME = ?)		");
+		sql.append("   	 , memo = ?					");
+		sql.append(" WHERE id = ?					");
 		
-		Connection con			= open();
+		Connection con		= open();
 		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		
 		try(con;pstmt){
